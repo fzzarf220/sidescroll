@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html ng-app='myPages'>
+
+  <head>
+    <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <script data-require="jquery@*" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script data-require="angular.js@*" data-semver="1.3.0-beta.5" src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+
+  <body ng-controller='myPagesCtrl'>
+    <!-- NAVIGATION -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class='container-fluid'>
+        <div class='navbar-header'>
+          <a class='navbar-brand' href='#_home'>My Pages</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class='nav navbar-nav'>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Menu <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href='#home'>Home</a></li>
+                <li><a href='#page2'>Page 2</a></li>
+                <li><a href='#page3'>Page 3</a></li>
+                <li><a href='#page5'>Page 5</a></li>
+                <li><a href='#page6'>Page 6</a></li>
+                <li><a href='#_last'>Last</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class='pull-right'>
+            <ul class='nav navbar-nav'>
+              <li ng-class='{"disabled":current == 0 && false}'><a href='#_prev'>previous</a></li>
+              <li ng-class='{"disabled":current==(total-1) && false}'><a href='#_next'>next</a></li>
+            </ul>
+            <p class='navbar-text pull-right'>page {{current+1}} of {{total}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ERRORS -->
+    <div ng-if="error" class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" ng-click='dismissError()'>
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <strong>Error!</strong> {{error}}
+    </div>
+    
+    <!-- PAGES -->
+    <div class='pages'>
+      <div class='page'>
+        <a name="#home"></a>
+        <h1>Welcome</h1>
+        <div>
+          <a href="#_next">the next page</a><br />
+          <a href="#page4">the 4th page</a><br />
+          <a href="#last">the last page</a><br />
+          <a href="#_unknown">the unknown page</a><br />
+          <button class='btn btn-success' ng-click='goToPage("_next");'>link _next</button>
+          <button class='btn btn-danger' ng-click='goToPage("_prev");'>link _prev</button>
+          <button class='btn btn-warning' ng-click='goToPage("_last")'>link _last</button>
+        </div>
+        <br />
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elit ante, sollicitudin quis ultrices nec, scelerisque et nunc. Nulla facilisi. Suspendisse ullamcorper nulla tellus, sit amet tempor enim faucibus eget. Etiam at suscipit ligula, nec fermentum ante. Sed imperdiet dolor eu blandit egestas. Ut rhoncus interdum purus id lacinia. Sed in blandit leo. In ut sem in justo adipiscing mattis. In in turpis sapien. Suspendisse vitae ante diam. Sed tristique, felis in porttitor rhoncus, nibh urna venenatis purus, at malesuada enim enim nec odio. Ut porta turpis vitae lorem vulputate ultricies. Nam lacus orci, varius nec nibh at, tempor porta augue. Pellentesque ut tincidunt velit.
+          <br /><br />
+          Quisque in elit magna. Cras vel felis quam. Nam ac nisi sit amet arcu laoreet tempus. Nam mollis dui quis pharetra rutrum. Phasellus elementum massa quis nunc porttitor, at facilisis risus ullamcorper. Morbi tempus mi quam, id consequat ligula interdum vel. Nulla facilisi. Integer facilisis, ipsum a molestie ullamcorper, augue arcu imperdiet libero, vel porta nulla mauris in ligula.
+          <br /><br />
+          Aliquam sagittis tempor egestas. Pellentesque semper tempor nisi vitae condimentum. Suspendisse eu sem eu nisl rhoncus suscipit non ultrices felis. Proin feugiat, dolor in faucibus semper, nisl lorem convallis sem, et molestie erat arcu a nunc. Nulla facilisi. Nunc magna magna, convallis in sapien vel, mollis commodo nulla. Pellentesque at mi eget orci auctor ullamcorper nec id libero. Morbi faucibus ornare feugiat. Sed odio massa, tempor non sem volutpat, porta mattis justo. Aliquam congue, mauris sed euismod auctor, dui nulla malesuada lectus, non mattis leo urna ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus commodo purus nisi, quis ullamcorper mi consectetur vitae.
+          <br /><br />
+          Donec eget vehicula lacus. Sed at metus bibendum, elementum orci nec, blandit urna. Suspendisse lacus lacus, egestas porta lacinia vel, molestie vitae mauris. Nunc consectetur purus et mi iaculis, nec sagittis lectus pretium. Aliquam ultrices risus vel massa ultrices facilisis. Nullam dapibus quam dictum, dictum felis fringilla, laoreet lectus. Fusce adipiscing commodo orci nec rutrum. Nunc lacus quam, feugiat ac odio nec, congue sodales velit. Pellentesque faucibus tincidunt elementum.
+          <br /><br />
+          Fusce eros orci, hendrerit quis leo nec, vestibulum tristique lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec sit amet arcu non tortor iaculis sagittis vitae at lacus. Donec tincidunt molestie nulla, at dictum magna posuere sed. Maecenas dui urna, elementum viverra ante ut, fermentum consectetur ipsum. Vestibulum ipsum orci, dictum sed neque ut, bibendum tincidunt urna. Morbi et faucibus dui. Morbi ornare ac nulla vel vehicula.
+        </div>
+      </div><div class='page' ng-repeat='page in [2,3,4,5,6,7,8,9,10,"last"]'>
+        <a name="#page{{page}}"></a>
+        <h1>Page {{page}}</h1>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elit ante, sollicitudin quis ultrices nec, scelerisque et nunc. Nulla facilisi. Suspendisse ullamcorper nulla tellus, sit amet tempor enim faucibus eget. Etiam at suscipit ligula, nec fermentum ante. Sed imperdiet dolor eu blandit egestas. Ut rhoncus interdum purus id lacinia. Sed in blandit leo. In ut sem in justo adipiscing mattis. In in turpis sapien. Suspendisse vitae ante diam. Sed tristique, felis in porttitor rhoncus, nibh urna venenatis purus, at malesuada enim enim nec odio. Ut porta turpis vitae lorem vulputate ultricies. Nam lacus orci, varius nec nibh at, tempor porta augue. Pellentesque ut tincidunt velit.
+          <br /><br />
+          Quisque in elit magna. Cras vel felis quam. Nam ac nisi sit amet arcu laoreet tempus. Nam mollis dui quis pharetra rutrum. Phasellus elementum massa quis nunc porttitor, at facilisis risus ullamcorper. Morbi tempus mi quam, id consequat ligula interdum vel. Nulla facilisi. Integer facilisis, ipsum a molestie ullamcorper, augue arcu imperdiet libero, vel porta nulla mauris in ligula.
+          <br /><br />
+          Aliquam sagittis tempor egestas. Pellentesque semper tempor nisi vitae condimentum. Suspendisse eu sem eu nisl rhoncus suscipit non ultrices felis. Proin feugiat, dolor in faucibus semper, nisl lorem convallis sem, et molestie erat arcu a nunc. Nulla facilisi. Nunc magna magna, convallis in sapien vel, mollis commodo nulla. Pellentesque at mi eget orci auctor ullamcorper nec id libero. Morbi faucibus ornare feugiat. Sed odio massa, tempor non sem volutpat, porta mattis justo. Aliquam congue, mauris sed euismod auctor, dui nulla malesuada lectus, non mattis leo urna ut ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus commodo purus nisi, quis ullamcorper mi consectetur vitae.
+          <br /><br />
+          Donec eget vehicula lacus. Sed at metus bibendum, elementum orci nec, blandit urna. Suspendisse lacus lacus, egestas porta lacinia vel, molestie vitae mauris. Nunc consectetur purus et mi iaculis, nec sagittis lectus pretium. Aliquam ultrices risus vel massa ultrices facilisis. Nullam dapibus quam dictum, dictum felis fringilla, laoreet lectus. Fusce adipiscing commodo orci nec rutrum. Nunc lacus quam, feugiat ac odio nec, congue sodales velit. Pellentesque faucibus tincidunt elementum.
+          <br /><br />
+          Fusce eros orci, hendrerit quis leo nec, vestibulum tristique lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec sit amet arcu non tortor iaculis sagittis vitae at lacus. Donec tincidunt molestie nulla, at dictum magna posuere sed. Maecenas dui urna, elementum viverra ante ut, fermentum consectetur ipsum. Vestibulum ipsum orci, dictum sed neque ut, bibendum tincidunt urna. Morbi et faucibus dui. Morbi ornare ac nulla vel vehicula.
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
